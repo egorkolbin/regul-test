@@ -10,6 +10,8 @@
 </template>
 
 <style scoped lang="scss">
+@use '/app/assets/scss/mixins' as m;
+
 .product {
   padding: 8px;
   box-shadow: none;
@@ -18,46 +20,29 @@
     width: 100%;
     border-radius: 20px !important;
     aspect-ratio: 1.286;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    @include m.skeleton;
   }
 
   &-price {
     width: 40%;
     height: 20px;
     margin-top: 16px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    @include m.skeleton;
     border-radius: 4px !important;
   }
 
   &-title {
     height: 20px;
     margin: 12px 0 9px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    @include m.skeleton;
     border-radius: 4px !important;
   }
 
   &-action {
     height: 56px;
-    border-top: 1px solid #e8e8e8;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    border-top: 1px solid var(--grey);
+    @include m.skeleton;
     border-radius: 4px !important;
-  }
-}
-
-@keyframes shimmer {
-  from {
-    background-position: -200% 0;
-  }
-  to {
-    background-position: 200% 0;
   }
 }
 </style>

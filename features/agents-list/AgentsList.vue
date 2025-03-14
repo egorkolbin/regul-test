@@ -18,14 +18,5 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-.agents {
-  margin: 32px auto 0;
-  display: flex;
-  justify-content: center;
-  &-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-}
+@use 'AgentsList';
 </style>

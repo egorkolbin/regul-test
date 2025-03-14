@@ -3,7 +3,7 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 160%;
-  color: #f5f5f5;
+  color: var(--white-100);
   text-transform: none;
   padding: 8px 12px;
 
@@ -11,19 +11,36 @@
     box-shadow: none !important;
   }
 
-  &.big{
+  &.big {
     padding: 16px 20px;
   }
 
   &.bg-grey {
-    color: #0f0f0f !important;
-    background-color: #e8e8e8 !important;
+    color: var(--black) !important;
+    background-color: var(--grey) !important;
 
     &.active {
-      box-shadow: 0 0 0 1px #0f0f0f;
+      box-shadow: 0 0 0 1px var(--black);
     }
   }
 }
 
-.q-tab {
+.q-select {
+  background: var(grey-200);
+  border-radius: 12px;
+
+  .q-field__control{
+    &:before{
+      border: 1px solid var(--grey-100);
+      border-radius: 12px;
+    }
+  }
+
+  .q-field__native {
+    height: 56px;
+  }
+
+  .q-field__append {
+    height: 56px !important;
+  }
 }

@@ -35,8 +35,10 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
-    <q-form @submit="handleLogin" class="q-gutter-md">
+  <div class="page">
+    <h1>Авторизация</h1>
+
+    <q-form @submit="handleLogin" class="form">
       <q-input
         v-model="form.login"
         label="Логин"
@@ -50,7 +52,48 @@ const handleLogin = async () => {
         :rules="[(val) => !!val || 'Обязательное поле']"
       />
 
-      <q-btn label="Войти" type="submit" color="primary" :loading="isLoading" />
+      <q-btn
+        :label="isLoading ? 'Загрузка...' : 'Войти'"
+        type="submit"
+        color="primary"
+        class="big"
+        :loading="isLoading"
+      />
     </q-form>
   </div>
 </template>
+
+<style scoped lang="scss">
+@use '/app/assets/scss/variables' as *;
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 16px;
+
+  .form {
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+
+    .q-input {
+      width: 100%;
+    }
+
+    .q-btn {
+      width: 50%;
+
+      @media (max-width: $tablet) {
+        width: 100%;
+      }
+    }
+  }
+}
+</style>

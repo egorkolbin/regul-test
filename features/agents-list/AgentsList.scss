@@ -1,0 +1,21 @@
+@use '/app/assets/scss/variables' as *;
+
+.agents {
+  margin: 32px auto 64px;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $tablet) {
+    margin: 24px auto 48px;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    @media (max-width: $tablet) {
+      gap: 8px;
+    }
+  }
+}

@@ -2,27 +2,30 @@
 import { onMounted, ref } from 'vue'
 
 import { useFetch } from '#app'
+import { useAgentStore } from '#shared/store/agentStore'
 import type { Agent } from '~/entities/agent/model/agent'
 import AgentsList from '~/features/agents-list/AgentsList.vue'
 import AgentsListSkeleton from '~/features/agents-list/AgentsListSkeleton.vue'
 
-const agentsData = ref<Agent[] | null>(null)
+const agentStore = useAgentStore()
+
 const isLoading = ref<boolean>(true)
 
 onMounted(() => {
   setTimeout(async () => {
     const { data: agents } = await useFetch('/api/agents')
-    agentsData.value = agents.value
+    agentStore.setAgents(agents.value as Agent[])
     isLoading.value = false
   }, 1500)
 })
 </script>
 
 <template>
-  <div class="container">
-    <AgentsList v-if="!isLoading && agentsData" :agents="agentsData" />
-    <AgentsListSkeleton v-else />
-  </div>
+  <AgentsList
+    v-if="!isLoading && agentStore.agents"
+    :agents="agentStore.agents"
+  />
+  <AgentsListSkeleton v-else />
 </template>
 
 <style scoped lang="scss"></style>

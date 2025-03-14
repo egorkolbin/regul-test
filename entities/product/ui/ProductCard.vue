@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useNuxtApp } from '#app'
 import type { Product } from '~/entities/product/model/product'
 import { useFormatCurrency } from '~/shared/hooks/useFormatCurrency'
 import { useFormatDate } from '~/shared/hooks/useFormatDate'
@@ -7,6 +8,7 @@ const props = defineProps<{
   product: Product
 }>()
 
+const { $viewport } = useNuxtApp()
 const { formatCurrency } = useFormatCurrency()
 const { formatDate } = useFormatDate()
 
@@ -22,8 +24,6 @@ const getStatusLabel = (status: string) => {
       return 'Увеличьте количество просмотров'
     case 'closed':
       return 'Объявление скрыто'
-    default:
-      return 'Неизвестный статус'
   }
 }
 </script>
@@ -40,6 +40,9 @@ const getStatusLabel = (status: string) => {
           <q-icon name="event" size="sm" />
           <span>{{ formatDate(product.dateAt) }}</span>
         </div>
+      </div>
+      <div v-if="$viewport.isLessThan('tablet')" class="product-events">
+        Действия
       </div>
       <img :src="product.image" alt="" class="image" />
     </div>
@@ -60,9 +63,13 @@ const getStatusLabel = (status: string) => {
 </template>
 
 <style scoped lang="scss">
+@use '/app/assets/scss/variables' as *;
+
 .product {
   padding: 8px;
   box-shadow: none;
+  display: flex;
+  flex-direction: column;
 
   &-img {
     position: relative;
@@ -90,10 +97,10 @@ const getStatusLabel = (status: string) => {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(27, 29, 34, 0.6);
+      background: var(--black-bg);
       border-radius: 12px;
       padding: 4px 8px;
-      color: #f5f5f5;
+      color: var(--white-100);
 
       span {
         font-weight: 500;
@@ -101,6 +108,20 @@ const getStatusLabel = (status: string) => {
         line-height: 154%;
       }
     }
+  }
+
+  &-events {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 6px 12px;
+    background: var(--white-100);
+    border-radius: 12px;
+    border: 1px solid var(--grey-100);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 154%;
+    text-align: center;
   }
 
   &-price {
@@ -115,6 +136,10 @@ const getStatusLabel = (status: string) => {
     font-size: 15px;
     line-height: 160%;
     margin: 12px 0 9px;
+
+    @media (max-width: $tablet) {
+      margin: 4px 0 12px;
+    }
   }
 
   &-action {
@@ -122,8 +147,10 @@ const getStatusLabel = (status: string) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 4px;
     padding: 12px 0 4px;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid var(--grey);
+    margin-top: auto;
   }
 
   &-status {

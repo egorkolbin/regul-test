@@ -1,12 +1,29 @@
-@use 'variables';
+@use 'variables' as *;
 @use 'quasar';
+@use 'null';
+
+.page{
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
 .container{
   width: 100%;
   margin: 0 auto;
   padding: 0 32px;
+
+  @media (max-width: $desktop) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: $tablet) {
+    padding: 0 8px;
+  }
 }
 
-body{
-  font-family: 'Inter';
+h1{
+  font-size: 32px;
+  font-weight: 600;
 }

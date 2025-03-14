@@ -1,6 +1,28 @@
 :root {
   --primary: #337566;
   --black: #0f0f0f;
+  --total-black: #000000;
   --red: #bd3223;
   --text: #6b6b6b;
+  --white: #ffffff;
+  --white-100: #f5f5f5;
+  --grey: #e8e8e8;
+  --grey-100: #dbdbdb;
+  --grey-200: #ededed;
+  --grey-300: #ccc;
+
+  --main-font: 'Inter';
+  --second-font: 'Noto Serif';
+
+  --skeleton-bg: linear-gradient(
+                  90deg,
+                  #e0e0e0 25%,
+                  #f0f0f0 50%,
+                  #e0e0e0 75%
+  );
+  --black-bg: rgba(27, 29, 34, 0.6);
+  --header-bg: #fff7eb;
 }
+
+$desktop: 1024px;
+$tablet: 768px;

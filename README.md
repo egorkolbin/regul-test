@@ -2,6 +2,10 @@
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Авторизация:
+- login: admin
+- password: secret
+
 ## Setup
 
 Make sure to install dependencies:

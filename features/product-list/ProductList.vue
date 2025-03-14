@@ -18,11 +18,5 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-.products {
-  &-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-}
+@use 'ProductList';
 </style>

@@ -2,12 +2,14 @@
 import { computed, onMounted, ref } from 'vue'
 
 import { useFetch } from '#app'
+import { useProductStore } from '#shared/store/productStore'
 import type { Product, ProductStatus } from '~/entities/product/model/product'
 import ProductList from '~/features/product-list/ProductList.vue'
 import ProductListSkeleton from '~/features/product-list/ProductListSkeleton.vue'
 
+const productStore = useProductStore()
+
 const isLoading = ref<boolean>(true)
-const productsData = ref<Product[] | null>(null)
 const selectedStatus = ref<ProductStatus | null>(null)
 
 const statusOptions = ref<{ label: string; value: ProductStatus | null }[]>([
@@ -18,18 +20,17 @@ const statusOptions = ref<{ label: string; value: ProductStatus | null }[]>([
 ])
 
 const filteredProducts = computed<Product[]>(() => {
-  if (!productsData.value) return []
-  if (!selectedStatus.value) return productsData.value
-  return productsData.value.filter(
+  if (!productStore.products) return []
+  if (!selectedStatus.value) return productStore.products
+  return productStore.products.filter(
     (product) => product.status === selectedStatus.value
   )
 })
 
 onMounted(() => {
-  console.log(productsData.value)
   setTimeout(async () => {
     const { data } = await useFetch('/api/products')
-    productsData.value = data.value
+    productStore.setProducts(data.value as Product[])
     isLoading.value = false
   }, 1500)
 })
@@ -49,7 +50,7 @@ onMounted(() => {
     </div>
 
     <ProductList
-      v-if="!isLoading && productsData"
+      v-if="!isLoading && productStore.products"
       :products="filteredProducts"
     />
     <ProductListSkeleton v-else />
@@ -57,8 +58,15 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+@use '/app/assets/scss/variables' as *;
+
 .select {
   max-width: 438px;
   margin: 24px auto;
+
+  @media (max-width: $tablet) {
+    width: 100%;
+    max-width: none;
+  }
 }
 </style>
