@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useNuxtApp } from '#app'
 import { useGlobalStore } from '#shared/store/globalStore'
-import NavigateTabs from '~/features/navigate-tabs/NavigateTabs.vue'
+import NavigateTabs from '~/features/navigate-tabs/ui/NavigateTabs.vue'
 import AboutBlock from '~/widgets/about-block/AboutBlock.vue'
 import AgentsBlock from '~/widgets/agents-block/AgentsBlock.vue'
 import CompanyBlock from '~/widgets/company-block/CompanyBlock.vue'

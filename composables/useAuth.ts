@@ -1,4 +1,4 @@
-export function useAuth() {
+export const useAuth = () => {
   const token = useState<string | null>('token', () =>
     localStorage.getItem('token')
   )

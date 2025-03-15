@@ -4,6 +4,8 @@ import type { Product } from '~/entities/product/model/product'
 import { useFormatCurrency } from '~/shared/hooks/useFormatCurrency'
 import { useFormatDate } from '~/shared/hooks/useFormatDate'
 
+import { getStatusLabel } from '../model/productUtils'
+
 const props = defineProps<{
   product: Product
 }>()
@@ -15,17 +17,6 @@ const { formatDate } = useFormatDate()
 const status = ref(props.product.status)
 
 const updateStatus = () => (status.value = 'active')
-
-const getStatusLabel = (status: string) => {
-  switch (status) {
-    case 'active':
-      return 'Объявление продвигается'
-    case 'inactive':
-      return 'Увеличьте количество просмотров'
-    case 'closed':
-      return 'Объявление скрыто'
-  }
-}
 </script>
 
 <template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useNuxtApp } from '#app'
 import type { Agent } from '~/entities/agent/model/agent'
+import { getAverageReview } from '~/entities/agent/model/agentUtils'
 
 const props = defineProps<{
   agent: Agent
@@ -8,11 +9,7 @@ const props = defineProps<{
 
 const { $viewport } = useNuxtApp()
 
-const averageReview = computed(() => {
-  if (!props.agent.reviews || props.agent.reviews.length === 0) return 0
-  const sum = props.agent.reviews.reduce((acc, review) => acc + review, 0)
-  return (sum / props.agent.reviews.length).toFixed(1)
-})
+const averageReview = computed(() => getAverageReview(props.agent.reviews))
 </script>
 
 <template>
